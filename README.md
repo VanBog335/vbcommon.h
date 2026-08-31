@@ -1,3 +1,5 @@
-common .h files that i can use if i dont forget to download and put it in my project's folder
+vbcommon.h
 
-v0.1.0
+a lot of usefull stuff by default.
+
+v0.2.0
