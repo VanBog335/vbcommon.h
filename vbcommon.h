@@ -1,4 +1,4 @@
-// vbcommon.h - by https://github.com/VanBog335. v0.2.0
+// vbcommon.h - by https://github.com/VanBog335. v0.2.1
 
 #ifndef VBCOMMON_H
 #define VBCOMMON_H
@@ -8,6 +8,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef char s8;
 typedef unsigned char u8;
@@ -127,7 +128,7 @@ u64 vb_rand64()
 
 f64 vb_randfloat()
 {
-	return (f64)vb_rand64() / UINT64_MAX;
+	return ((f64)vb_rand32()) / (UINT32_MAX);
 }
 
 // -------- End random -------- //
@@ -247,11 +248,11 @@ s8 *vb_fixed2str(s8 *buf, fp32 num, u8 decimals)
 	u64 fracpart = unum & (FIXEDONE-1);
 	fracpart = (fracpart*scale)>>FIXEDBITS;
 
-	buf += sprintf(buf, "%u", intpart);
+	buf += sprintf(buf, "%llu", intpart);
 
 	if (scale != 1) {
 		*buf++ = '.';
-		sprintf(buf, "%0*u\0", numOfDecimals, fracpart);
+		sprintf(buf, "%0*llu", numOfDecimals, fracpart);
 	}
 
 	return oldbuf;
